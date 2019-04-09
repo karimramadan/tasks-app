@@ -3,6 +3,7 @@ let tasksList = {
     addTask: function(taskTitle){
         this.tasks.push({
             taskTitle: taskTitle,
+            active: false,
             todos: []
         });
         view.displayTasks()
@@ -156,6 +157,10 @@ container.addEventListener('click', function(event){
         handlers.addTodo( taskid );
     }
     if( event.target.dataset.taskid ){
+        document.querySelectorAll('#tasklist li').forEach(function(li){
+            li.className = "";
+        })
+        event.target.className = "active";
         view.displayTodos( event.target.dataset.taskid );
         document.getElementById('todolist').dataset.taskid = event.target.dataset.taskid;
     }
