@@ -60,13 +60,13 @@ let tasksList = {
 
 let handlers = {
     addTask: function(){
-        if ( document.getElementById("task_input").value != '' ){
+        if ( document.getElementById("task_input").value != "" ){
             tasksList.addTask( document.getElementById("task_input").value );
             document.getElementById("task_input").value = "";
         }       
     },
     addTodo: function(position){
-        if( document.getElementById("todo_input").value = "" ){
+        if( document.getElementById("todo_input").value != "" ){
             tasksList.addTodo( position , document.getElementById("todo_input").value );
             document.getElementById("todo_input").value = "";
         }
