@@ -1,6 +1,6 @@
 let tasksList = {
     tasks: [],
-    addTask: function(taskTitle){
+    addTask(taskTitle){
         this.tasks.push({
             taskTitle: taskTitle,
             active: false,
@@ -8,40 +8,40 @@ let tasksList = {
         });
         view.displayTasks()
     },
-    editTask: function(position, newTitle){
+    editTask(position, newTitle){
         newTitle = prompt("What is in your mind?");
         if( newTitle != null ){
             this.tasks[position].taskTitle = newTitle;
             view.displayTasks()
         }        
     },
-    deleteTask: function(position){
+    deleteTask(position){
         this.tasks.splice(position, 1);
         view.displayTasks()
     },
-    addTodo: function(position, todoText){
+    addTodo(position, todoText){
         this.tasks[position].todos.push({
             todoText: todoText,
             completed: false
         });
         view.displayTodos( position )
     },
-    deleteTodo: function(taskid, todoPosition){
+    deleteTodo(taskid, todoPosition){
         this.tasks[taskid].todos.splice(todoPosition, 1);
         view.displayTodos( taskid )
     },
-    editTodo: function(taskid, todoPosition, newText){
+    editTodo(taskid, todoPosition, newText){
         newText = prompt("What is in your mind?");
         if( newText != null ){
             this.tasks[taskid].todos[todoPosition].todoText = newText;
             view.displayTodos( taskid )
         }    
     },
-    toggleTodo: function(taskid, todoPosition){
+    toggleTodo(taskid, todoPosition){
         this.tasks[taskid].todos[todoPosition].completed = !this.tasks[taskid].todos[todoPosition].completed;
         view.displayTodos( taskid )
     },
-    toggleAll: function(taskid){
+    toggleAll(taskid){
         let counter = 0;
         this.tasks[taskid].todos.forEach(function(todo){
             if( todo.completed === true ){
@@ -60,13 +60,13 @@ let tasksList = {
 }
 
 let handlers = {
-    addTask: function(){
+    addTask(){
         if ( document.getElementById("task_input").value != "" ){
             tasksList.addTask( document.getElementById("task_input").value );
             document.getElementById("task_input").value = "";
         }       
     },
-    addTodo: function(position){
+    addTodo(position){
         if( document.getElementById("todo_input").value != "" ){
             tasksList.addTodo( position , document.getElementById("todo_input").value );
             document.getElementById("todo_input").value = "";
@@ -76,7 +76,7 @@ let handlers = {
 
 
 let view = {
-    displayTasks: function(){
+    displayTasks(){
         let tasksUl = document.getElementById('tasklist');
         tasksUl.innerHTML = '';
         tasksList.tasks.forEach(function(task, position){
@@ -96,7 +96,7 @@ let view = {
             tasksUl.appendChild( taskLi );
         }, this);
     },
-    displayTodos: function(index){
+    displayTodos(index){
         let taskTitle = document.getElementById('task-title');
         taskTitle.innerHTML = tasksList.tasks[index].taskTitle;
         let todoUl = document.getElementById('todolist');
@@ -119,27 +119,27 @@ let view = {
             todoUl.appendChild( todoLi );
         }, this);
     },
-    createEditButton : function(){
+    createEditButton(){
         let editButton = document.createElement('button');
         editButton.className = "edit-button";
         return editButton;
     },
-    createDeleteButton : function(){
+    createDeleteButton(){
         let deleteButton = document.createElement('button');
         deleteButton.className = "delete-button";
         return deleteButton;
     },
-    createUpButton : function(){
+    createUpButton(){
         let upButton = document.createElement('button');
         upButton.className = "up-button";
         return upButton;
     },
-    createDownButton : function(){
+    createDownButton(){
         let downButton = document.createElement('button');
         downButton.className = "down-button";
         return downButton;
     },
-    createToggleButton : function(){
+    createToggleButton(){
         let toggleButton = document.createElement('button');
         toggleButton.className = "toggle-button";
         return toggleButton;
